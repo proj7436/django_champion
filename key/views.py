@@ -33,7 +33,7 @@ class KeyAPI(APIView):
         my_data = GetAPISerializers(key)
         return Response(data=my_data.data, status=status.HTTP_200_OK)
     
-
+class ChangeKey(APIView):
     def post(self, request):
         my_data = PostKeySerializers(data=request.data)
 
