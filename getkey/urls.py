@@ -20,6 +20,6 @@ from django.urls import path, include
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('24092006/', admin.site.urls),
     path('', include('key.urls'))
 ]

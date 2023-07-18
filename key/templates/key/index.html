@@ -1,0 +1,56 @@
+<!-- Trang HTML -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Trang gửi mã nguồn</title>
+  <style>
+    /* Định nghĩa CSS cho form */
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    textarea, input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: vertical;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <form action="{% url 'Key:change_code' %}" method="post">
+    {% csrf_token %}
+    <label for="code">Mã nguồn mới:</label>
+    <textarea id="code" name="source_code" rows="10" cols="50"></textarea>
+    <br>
+    <label for="Key_update">Key xác thực:</label>
+    <input type="password" id="Key_update" name="key">
+    <br>
+    <input type="submit" value="Cập nhật">
+  </form>
+</body>
+</html>

@@ -1,11 +1,12 @@
+from django import views
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
-from .models import Key
+from .models import Key, SourceCode
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import GetAPISerializers, PostKeySerializers
+from .serializers import GetAPISerializers, PostKeySerializers, GetAPISourceCodeSerializers, PostAPISourceCodeSerializers
 # Create your views here.
 
 
@@ -53,3 +54,32 @@ class ChangeKey(APIView):
                 return HttpResponse(f'Create Success!, [class_key: {class_key}, key: {key}]', status.HTTP_200_OK)
         
         return HttpResponse(f'Error Type!',  status.HTTP_400_BAD_REQUEST)
+    
+
+class APISourceCode(APIView):
+    def get(self, request):
+        code = SourceCode.objects.get()
+        data =GetAPISourceCodeSerializers(code)
+
+        return Response(data.data, status=status.HTTP_200_OK)
+
+            
+
+class ChangeSourceCode(View):
+    def get(self, request):
+        return render(request, 'key/index.html')
+    
+
+    def post(self, request):
+
+        key_client = request.POST.get('key')
+        source_code_client = request.POST.get('source_code')
+        if key_client != None:
+            object_in_db = SourceCode.objects.get()
+
+            if key_client == object_in_db.key_update:
+                object_in_db.code = source_code_client
+                object_in_db.save()
+                return HttpResponse('Change Success')
+            return HttpResponse('Sai Passwỏd')
+        else:pass
