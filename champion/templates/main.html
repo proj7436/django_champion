@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,3 +26,97 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            overflow-x: auto;
+        }
+
+        .scrollable-table {
+            width: 100%;
+            overflow-x: auto;
+            padding: 10px;
+        }
+
+        .rank-table {
+            width: 100%;
+            max-width: 1000px;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+            margin: 0 auto;
+            background: url('https://www.transparentpng.com/thumb/football/SZm0M2-football-players-transparent-image.png');
+            background-size: cover;
+        }
+
+        .rank-table th,
+        .rank-table td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .rank-table th.yellow-cell {
+            background-color: yellow;
+            color: black;
+        }
+
+        /* Điều chỉnh giao diện cho màn hình điện thoại di động */
+        @media (max-width: 768px) {
+            .rank-table {
+                font-size: 14px;
+            }
+
+            .rank-table th,
+            .rank-table td {
+                padding: 6px;
+            }
+        }
+    </style>
+    <script>
+        window.addEventListener('load', () => {
+            const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+            audio.play();
+        });
+    </script>
+</head>
+<body>
+    <div class="bg-container">
+        <div class="table-container">
+            <div class="scrollable-table">
+                <table class="rank-table">
+                    <thead>
+                        <tr>
+                            <th class="yellow-cell">XH</th>
+                            <th class="yellow-cell">Đội</th>
+                            <th class="yellow-cell">ST</th>
+                            <th class="yellow-cell">Thắng</th>
+                            <th class="yellow-cell">Hòa</th>
+                            <th class="yellow-cell">Thua</th>
+                            <th class="yellow-cell">B.Thắng</th>
+                            <th class="yellow-cell">B.Thua</th>
+                            <th class="yellow-cell">H/S</th>
+                            <th class="yellow-cell">Điểm</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in list %}
+
+                        <tr>
+                            <td>{{item.rank}}</td>
+                            <td >{{item.name_team}}</td>
+                            <td>{{item.count_round}}</td>
+                            <td>{{item.count_win}}</td>
+                            <td>{{item.count_lose}}</td>
+                            <td>{{item.count_draw}}</td>
+                            <td>{{item.goal}}</td>
+                            <td>{{item.goal_conceded}}</td>
+                            <td>{{item.h_s}}</td>
+                            <td>{{item.point}}</td>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
