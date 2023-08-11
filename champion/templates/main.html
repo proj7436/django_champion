@@ -16,17 +16,9 @@
             width: 100vw;
             height: 100vh;
             overflow: hidden;
-            background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('https://img.freepik.com/premium-photo/golden-champion-trophy-cup-winner-blur-bokeh-dark-lights-background-ai-generated-art_77186-7997.jpg');
+            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAO8HaqbG_NKCGrEFfH6dBDs_2-V4wVnj_gQ&usqp=CAU');
             background-size: cover;
             background-position: center;
-        }
-
-        .background-overlay {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255,255,255,0.3) 10%, transparent 50%);
-            z-index: -1;
         }
 
         .table-container {
@@ -34,6 +26,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            background-color: rgba(255, 255, 255, 0.8);
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
             overflow-x: auto;
@@ -44,6 +37,8 @@
             border-collapse: collapse;
             border: 1px solid #ddd;
             margin: 20px;
+            background: url('https://www.transparentpng.com/thumb/football/SZm0M2-football-players-transparent-image.png');
+            background-size: cover;
         }
 
         .rank-table th,
@@ -70,11 +65,15 @@
             }
         }
     </style>
-
+    <script>
+        window.addEventListener('load', () => {
+            const audio = new Audio('https://www.dropbox.com/s/bddx0n6085mb3tn/y2mate.com%20-%20Hayya%20Hayya%20Better%20Together%20%20FIFA%20World%20Cup%202022%20Official%20Soundtrack.mp3?dl=0');
+            audio.play();
+        });
+    </script>
 </head>
 <body>
     <div class="bg-container">
-        <img src="https://img.freepik.com/premium-photo/golden-champion-trophy-cup-winner-blur-bokeh-dark-lights-background-ai-generated-art_77186-7997.jpg" alt="Background" class="background-img">
         <div class="table-container">
             <div class="scrollable-table">
                 <table class="rank-table">
@@ -93,7 +92,42 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Dữ liệu xếp hạng đội bóng sẽ được thêm vào đây -->
+                        <tr>
+                            <td>1</td>
+                            <td class="yellow-cell">Đội A</td>
+                            <td>10</td>
+                            <td>8</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>25</td>
+                            <td>10</td>
+                            <td>+15</td>
+                            <td>25</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td class="yellow-cell">Đội B</td>
+                            <td>10</td>
+                            <td>7</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>20</td>
+                            <td>8</td>
+                            <td>+12</td>
+                            <td>23</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td class="yellow-cell">Đội C</td>
+                            <td>10</td>
+                            <td>6</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>18</td>
+                            <td>12</td>
+                            <td>+6</td>
+                            <td>20</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
