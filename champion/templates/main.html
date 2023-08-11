@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng xếp hạng đội bóng</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .table-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow-x: auto;
+        }
+
+        .rank-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+        }
+
+        .rank-table th,
+        .rank-table td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .rank-table th {
+            background-color: #f2f2f2;
+            color: black;
+        }
+
+        .yellow-cell {
+            background-color: yellow;
+            color: black;
+        }
+
+        /* Điều chỉnh giao diện cho màn hình điện thoại di động */
+        @media (max-width: 768px) {
+            .table-container {
+                overflow-x: hidden;
+            }
+
+            .rank-table {
+                font-size: 14px;
+            }
+
+            .rank-table th,
+            .rank-table td {
+                padding: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="table-container">
+        <table class="rank-table">
+            <thead>
+                <tr>
+                    <th>XH</th>
+                    <th class="yellow-cell">Đội</th>
+                    <th>ST</th>
+                    <th>Thắng</th>
+                    <th>Hòa</th>
+                    <th>Thua</th>
+                    <th>B.Thắng</th>
+                    <th>B.Thua</th>
+                    <th>H/S</th>
+                    <th>Điểm</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dữ liệu xếp hạng đội bóng sẽ được thêm vào đây -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
