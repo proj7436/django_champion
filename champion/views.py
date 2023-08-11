@@ -7,3 +7,10 @@ from django.views import View
 class Main(View):
     def get(self, request):
         return render(request, 'main.html')
+    
+
+
+
+class AdminSite(View):
+    def get(self, request):
+        return render(request, 'admin.html')

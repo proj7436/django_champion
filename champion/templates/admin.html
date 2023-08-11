@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Cập nhật trận đấu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .admin-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        .team-picker {
+            margin-bottom: 20px;
+        }
+
+        select, button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .score-display {
+            text-align: center;
+        }
+
+        .team-score {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+        }
+
+        /* Điều chỉnh giao diện cho màn hình điện thoại di động */
+        @media (max-width: 768px) {
+            .admin-container {
+                padding: 10px;
+            }
+
+            select, button {
+                width: 100%;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const updateButton = document.getElementById('update-button');
+            const team1Score = document.getElementById('team1-score');
+            const team2Score = document.getElementById('team2-score');
+
+            updateButton.addEventListener('click', () => {
+                const selectedTeam1 = document.getElementById('team1').value;
+                const selectedTeam2 = document.getElementById('team2').value;
+
+                if (selectedTeam1 && selectedTeam2) {
+                    const score1 = prompt(`Nhập tỉ số cho ${selectedTeam1}`);
+                    const score2 = prompt(`Nhập tỉ số cho ${selectedTeam2}`);
+
+                    team1Score.innerText = `${selectedTeam1}: ${score1}`;
+                    team2Score.innerText = `${selectedTeam2}: ${score2}`;
+                } else {
+                    alert('Vui lòng chọn cả hai đội đấu trước khi cập nhật tỉ số.');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Admin - Cập nhật trận đấu</h1>
+        <div class="team-picker">
+            <h2>Chọn đội đấu:</h2>
+            <select id="team1">
+                <option value="">Chọn đội 1</option>
+                <option value="Team A">Đội A</option>
+                <option value="Team B">Đội B</option>
+                <!-- Thêm các đội khác nếu cần -->
+            </select>
+            <select id="team2">
+                <option value="">Chọn đội 2</option>
+                <option value="Team A">Đội A</option>
+                <option value="Team B">Đội B</option>
+                <!-- Thêm các đội khác nếu cần -->
+            </select>
+            <button id="update-button">Cập nhật tỉ số</button>
+        </div>
+        <div class="score-display">
+            <h2>Tỉ số:</h2>
+            <div class="team-score" id="team1-score"></div>
+            <div class="team-score" id="team2-score"></div>
+        </div>
+    </div>
+</body>
+</html>
