@@ -21,5 +21,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('24092006/', admin.site.urls),
-    path('', include('key.urls'))
+    path('', include('key.urls')),
+    path('PHUDUC/', include('champion.urls')),
 ]
