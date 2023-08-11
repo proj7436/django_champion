@@ -14,9 +14,5 @@ class Main(View):
 class AdminSite(View):
     def get(self, request):
 
-        oj = Champion.object.all()
-
-        context = {
-            "list":oj
-        }
-        return render(request, 'admin.html', context=context)
+        oj = Champion.objects.all()
+        return render(request, 'admin.html', {"list":oj})
