@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from .models import Champion
+from django.http import HttpResponse
 # Create your views here.
 
 
