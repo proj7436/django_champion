@@ -81,32 +81,51 @@
                 }
             });
         });
+        
+    document.addEventListener('DOMContentLoaded', () => {
+        const team1Select = document.querySelector('select[name="team1"]');
+        const team2Select = document.querySelector('select[name="team2"]');
+        const team1NameInput = document.getElementById('team1-name');
+        const team2NameInput = document.getElementById('team2-name');
+
+        team1Select.addEventListener('change', () => {
+            team1NameInput.value = team1Select.value;
+        });
+
+        team2Select.addEventListener('change', () => {
+            team2NameInput.value = team2Select.value;
+        });
+    });
+
+
     </script>
 </head>
 <body>
     <div class="admin-container">
         <h1>Admin - Cập nhật trận đấu</h1>
-        <div class="team-picker">
-            <h2>Chọn đội đấu:</h2>
-            <select id="team1">
-                <option value="">Chọn đội 1</option>
-                <option value="Team A">Đội A</option>
-                <option value="Team B">Đội B</option>
-                <!-- Thêm các đội khác nếu cần -->
-            </select>
-            <select id="team2">
-                <option value="">Chọn đội 2</option>
-                <option value="Team A">Đội A</option>
-                <option value="Team B">Đội B</option>
-                <!-- Thêm các đội khác nếu cần -->
-            </select>
-            <button id="update-button">Cập nhật tỉ số</button>
-        </div>
-        <div class="score-display">
-            <h2>Tỉ số:</h2>
-            <div class="team-score" id="team1-score"></div>
-            <div class="team-score" id="team2-score"></div>
-        </div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="team-picker">
+                <h2>Chọn đội đấu:</h2>
+                <select name="team1">
+                    <option value="">Chọn đội 1</option>
+                    <!-- Thêm các đội khác nếu cần -->
+                </select>
+                <select name="team2">
+                    <option value="">Chọn đội 2</option>
+                    <!-- Thêm các đội khác nếu cần -->
+                </select>
+                <input type="number" name="score1" placeholder="Tỉ số đội 1">
+                <input type="number" name="score2" placeholder="Tỉ số đội 2">
+
+                            <!-- Thêm các trường ẩn để lưu tên đội đấu -->
+            <input type="hidden" name="team1_name" id="team1-name">
+            <input type="hidden" name="team2_name" id="team2-name">
+
+                <button type="submit">Cập nhật tỉ số</button>
+            </div>
+        </form>
     </div>
+    
 </body>
 </html>
