@@ -109,10 +109,16 @@
                 <h2>Chọn đội đấu:</h2>
                 <select name="team1">
                     <option value="">Chọn đội 1</option>
+                    {% for item in list %}
+                    <option value="item.id"> item.name_team </option>
+                    {% endfor %}
                     <!-- Thêm các đội khác nếu cần -->
                 </select>
                 <select name="team2">
                     <option value="">Chọn đội 2</option>
+                    {% for item in list %}
+                    <option value="item.id"> item.name_team </option>
+                    {% endfor %}
                     <!-- Thêm các đội khác nếu cần -->
                 </select>
                 <input type="number" name="score1" placeholder="Tỉ số đội 1">

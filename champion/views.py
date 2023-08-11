@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import View
-
+from .models import Champion
 # Create your views here.
 
 
@@ -13,4 +13,10 @@ class Main(View):
 
 class AdminSite(View):
     def get(self, request):
-        return render(request, 'admin.html')
+
+        oj = Champion.object.all()
+
+        context = {
+            "list":oj
+        }
+        return render(request, 'admin.html', context=context)
