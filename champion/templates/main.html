@@ -6,71 +6,69 @@
     <title>Bảng xếp hạng đội bóng</title>
     <style>
         body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-.bg-container {
-    position: relative;
-    overflow: hidden;
-    max-width: 100%;
-}
+        .bg-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
 
-.background-img {
-    width: 100%;
-    height: auto;
-    filter: blur(5px);
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-}
+        .background-img {
+            width: 100%;
+            height: 100%;
+            filter: blur(5px);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
 
-.table-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    overflow-x: auto;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-}
+        .table-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            overflow-x: auto;
+        }
 
-.rank-table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid #ddd;
-}
+        .rank-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+            margin: 20px;
+        }
 
-.rank-table th,
-.rank-table td {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #ddd;
-}
+        .rank-table th,
+        .rank-table td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
 
-.rank-table th.yellow-cell {
-    background-color: yellow;
-    color: black;
-}
+        .rank-table th.yellow-cell {
+            background-color: yellow;
+            color: black;
+        }
 
-/* Điều chỉnh giao diện cho màn hình điện thoại di động */
-@media (max-width: 768px) {
-    .table-container {
-        overflow-x: hidden;
-    }
+        /* Điều chỉnh giao diện cho màn hình điện thoại di động */
+        @media (max-width: 768px) {
+            .rank-table {
+                font-size: 14px;
+            }
 
-    .rank-table {
-        font-size: 14px;
-    }
-
-    .rank-table th,
-    .rank-table td {
-        padding: 6px;
-    }
-}
-
+            .rank-table th,
+            .rank-table td {
+                padding: 6px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -94,18 +92,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Đội A</td>
-                            <td>10</td>
-                            <td>8</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>25</td>
-                            <td>10</td>
-                            <td>+15</td>
-                            <td>25</td>
-                        </tr> <!-- Dữ liệu xếp hạng đội bóng sẽ được thêm vào đây -->
+                        <!-- Dữ liệu xếp hạng đội bóng sẽ được thêm vào đây -->
                     </tbody>
                 </table>
             </div>
