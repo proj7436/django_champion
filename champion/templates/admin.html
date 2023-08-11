@@ -61,26 +61,6 @@
         }
     </style>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const updateButton = document.getElementById('update-button');
-            const team1Score = document.getElementById('team1-score');
-            const team2Score = document.getElementById('team2-score');
-
-            updateButton.addEventListener('click', () => {
-                const selectedTeam1 = document.getElementById('team1').value;
-                const selectedTeam2 = document.getElementById('team2').value;
-
-                if (selectedTeam1 && selectedTeam2) {
-                    const score1 = prompt(`Nhập tỉ số cho ${selectedTeam1}`);
-                    const score2 = prompt(`Nhập tỉ số cho ${selectedTeam2}`);
-
-                    team1Score.innerText = `${selectedTeam1}: ${score1}`;
-                    team2Score.innerText = `${selectedTeam2}: ${score2}`;
-                } else {
-                    alert('Vui lòng chọn cả hai đội đấu trước khi cập nhật tỉ số.');
-                }
-            });
-        });
         
     document.addEventListener('DOMContentLoaded', () => {
         const team1Select = document.querySelector('select[name="team1"]');
