@@ -120,24 +120,32 @@
         }
 
         .schedule-container {
-            text-align: center;
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
         }
 
         .schedule {
-            font-size: 18px;
-            padding: 5px;
-            display: inline-block;
-            position: relative;
-            animation: pulseAnimation 1.5s infinite;
+            margin: 10px 0;
+            padding: 8px;
+            border-radius: 15px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            width: 250px;
+            text-align: center;
         }
 
-        @keyframes pulseAnimation {
+        .animated-border {
+            animation: pulse-border 1s infinite;
+        }
+
+        @keyframes pulse-border {
             0%, 100% {
-                transform: scale(1);
+                border: 2px solid transparent;
             }
             50% {
-                transform: scale(1.1);
+                border: 2px solid yellow;
             }
         }
     </style>
@@ -170,7 +178,6 @@
 <body>
     <div class="bg-container">
         <div class="header">
-            <h1>Thông báo kết quả</h1>
             <marquee behavior="scroll" direction="left">Đội A đã thắng trận đấu với tỉ số 2 - 1</marquee>
         </div>
 
