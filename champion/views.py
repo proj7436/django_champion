@@ -14,7 +14,7 @@ class Main(View):
         champions = Champion.objects.all()
         
         # Sắp xếp danh sách đối tượng theo điểm số tăng dần, sau đó theo hiệu số giảm dần
-        sorted_champions = sorted(champions, key=lambda x: (x.point, -x.h_s), reverse=True)
+        sorted_champions = sorted(champions, key=lambda x: (x.point, x.h_s), reverse=True)
         
         # Trả về HttpResponse chứa nội dung HTML
         return render(request, 'main.html', {'sorted_champions': sorted_champions})
@@ -30,7 +30,7 @@ class AdminSite(View):
     def post(self, request):
 
         input_ = request.POST
-        form = ChampionForm(data=request.POST)
+        form = ChampionForm(request.POST)
 
         if form.is_valid():
             team1_name = input_.get('team1_name')
