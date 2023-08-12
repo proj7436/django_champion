@@ -169,11 +169,15 @@
 </head>
 <body>
     <div class="bg-container">
+        {% if notification %}
         <div class="header">
-            <h1>Thông báo kết quả</h1>
-            <marquee behavior="scroll" direction="left">Đội A đã thắng trận đấu với tỉ số 2 - 1</marquee>
+            <marquee behavior="scroll" direction="left">{{notification}}</marquee>
         </div>
-
+        {%else%}
+        <div>
+            <marquee behavior="scroll" direction="left">Vui là 9, thắng là 10.</marquee>
+        </div>
+        {% endif %}
         <div class="table-container">
             <div class="scrollable-table">
                 <table class="rank-table">

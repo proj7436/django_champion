@@ -6,4 +6,4 @@ from .models import Champion
 class ChampionForm(ModelForm):
     class Meta:
         model = Champion
-        fields = '__all__'
+        fields = ('point', 'name_team')
