@@ -23,6 +23,7 @@
 
         .table-container {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -36,6 +37,7 @@
             width: 100%;
             overflow-x: auto;
             padding: 10px;
+            margin-bottom: 20px;
         }
 
         .rank-table {
@@ -71,16 +73,107 @@
                 padding: 6px;
             }
         }
+
+        .header {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+        }
+
+        .countdown-container {
+            text-align: center;
+            position: relative;
+        }
+
+        .countdown {
+            font-size: 24px;
+            background-color: #fff;
+            border-radius: 50%;
+            padding: 10px 20px;
+            display: inline-block;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .animated-border {
+            border: 2px solid transparent;
+            border-image: linear-gradient(90deg, #ff5733, #ffc300);
+            border-image-slice: 1;
+            animation: borderAnimation 2s infinite;
+        }
+
+        @keyframes borderAnimation {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .win-announcement {
+            text-align: center;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+        }
+
+        .schedule-container {
+            text-align: center;
+            position: relative;
+        }
+
+        .schedule {
+            font-size: 18px;
+            padding: 5px;
+            display: inline-block;
+            position: relative;
+            animation: pulseAnimation 1.5s infinite;
+        }
+
+        @keyframes pulseAnimation {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
     </style>
     <script>
         window.addEventListener('load', () => {
             const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
             audio.play();
         });
+
+        function updateTime() {
+            const countdownElement = document.getElementById('countdown');
+            const now = new Date();
+            const matchTime = new Date('2023-08-11T18:00:00'); // Thay bằng thời gian thực tế của trận đấu
+            const timeDiff = matchTime - now;
+
+            const seconds = Math.floor(timeDiff / 1000) % 60;
+            const minutes = Math.floor(timeDiff / (1000 * 60)) % 60;
+            const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+
+            countdownElement.textContent = `${hours.toString().padStart(2, '0')} : ${minutes.toString().padStart(2, '0')} : ${seconds.toString().padStart(2, '0')}`;
+
+            if (timeDiff <= 0) {
+                countdownElement.textContent = 'Trận đấu đã kết thúc';
+            }
+        }
+
+        setInterval(updateTime, 1000);
     </script>
 </head>
 <body>
     <div class="bg-container">
+        <div class="header">
+            <h1>Thông báo kết quả</h1>
+            <marquee behavior="scroll" direction="left">Đội A đã thắng trận đấu với tỉ số 2 - 1</marquee>
+        </div>
+
         <div class="table-container">
             <div class="scrollable-table">
                 <table class="rank-table">
@@ -99,24 +192,51 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for item in sorted_champions %}
-
                         <tr>
-                            <td>{{item.rank}}</td>
-                            <td >{{item.name_team}}</td>
-                            <td>{{item.count_round}}</td>
-                            <td>{{item.count_win}}</td>
-                            <td>{{item.count_lose}}</td>
-                            <td>{{item.count_draw}}</td>
-                            <td>{{item.goal}}</td>
-                            <td>{{item.goal_conceded}}</td>
-                            <td>{{item.h_s}}</td>
-                            <td>{{item.point}}</td>
+                            <td>1</td>
+                            <td class="yellow-cell">Đội A</td>
+                            <td>10</td>
+                            <td>8</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>25</td>
+                            <td>10</td>
+                            <td>+15</td>
+                            <td>25</td>
                         </tr>
-                        {% endfor %}
+                        <tr>
+                            <td>2</td>
+                            <td class="yellow-cell">Đội B</td>
+                            <td>10</td>
+                            <td>7</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>20</td>
+                            <td>8</td>
+                            <td>+12</td>
+                            <td>23</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td class="yellow-cell">Đội C</td>
+                            <td>10</td>
+                            <td>6</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>18</td>
+                            <td>12</td>
+                            <td>+6</td>
+                            <td>20</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
+        </div>
+
+        <div class="schedule-container">
+            <div class="schedule animated-border">19:00 - Đội A vs Đội B</div>
+            <div class="schedule">20:30 - Đội C vs Đội D</div>
+            <div class="schedule">22:00 - Đội E vs Đội F</div>
         </div>
     </div>
 </body>
