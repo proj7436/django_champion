@@ -15,3 +15,15 @@ class Champion(models.Model):
     point = models.IntegerField()
     def __str__(self) -> str:
         return self.name_team
+
+
+
+
+class InfoMatch(models.Model):
+    info = models.CharField(max_length=255)
+    time = models.CharField(max_length=25)
+    
+    
+    
+class Notification(models.Model):
+    noti = models.CharField(max_length = 255, default='Vui là 9, Thắng là 10.')

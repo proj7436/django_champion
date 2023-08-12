@@ -16,6 +16,10 @@ class Main(View):
         # Sắp xếp danh sách đối tượng theo điểm số tăng dần, sau đó theo hiệu số giảm dần
         sorted_champions = sorted(champions, key=lambda x: (x.point, x.h_s), reverse=True)
         
+        # Thêm một thuộc tính mới "index" cho mỗi đối tượng champion
+        for index, champion in enumerate(sorted_champions, start=1):
+            champion.index = index
+        
         # Trả về HttpResponse chứa nội dung HTML
         return render(request, 'main.html', {'sorted_champions': sorted_champions})
 

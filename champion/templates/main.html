@@ -1,3 +1,9 @@
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +15,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: black;
         }
 
         .bg-container {
@@ -16,9 +23,18 @@
             width: 100vw;
             height: 100vh;
             overflow: hidden;
-            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAO8HaqbG_NKCGrEFfH6dBDs_2-V4wVnj_gQ&usqp=CAU');
-            background-size: cover;
-            background-position: center;
+        }
+
+        .white-floating-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            z-index: -1;
         }
 
         .table-container {
@@ -27,29 +43,46 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
             overflow-x: auto;
+            overflow-y: auto; /* Hide vertical scrollbar */
         }
 
-        .scrollable-table {
-            width: 100%;
-            overflow-x: auto;
+        .schedule-container {
+            text-align: center;
+            position: relative;
+            background-color: white;
             padding: 10px;
-            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .schedule-table {
+            width: 100%;
+            max-width: 600px;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        .schedule-table th,
+        .schedule-table td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .schedule-table th {
+            background-color: #333;
+            color: white;
         }
 
         .rank-table {
             width: 100%;
-            max-width: 1000px;
+            max-width: 600px;
             border-collapse: collapse;
-            border: 1px solid #ddd;
-            margin: 0 auto;
-            background: url('https://www.transparentpng.com/thumb/football/SZm0M2-football-players-transparent-image.png');
-            background-size: cover;
+            margin: 20px auto; /* Adjusted margin */
+            background-color: white; /* Same background color as schedule */
         }
-
+        
         .rank-table th,
         .rank-table td {
             padding: 10px;
@@ -62,120 +95,54 @@
             color: black;
         }
 
-        /* Điều chỉnh giao diện cho màn hình điện thoại di động */
-        @media (max-width: 768px) {
-            .rank-table {
-                font-size: 14px;
-            }
-
-            .rank-table th,
-            .rank-table td {
-                padding: 6px;
-            }
-        }
-
-        .header {
+        /* ... (Rest of the CSS remains unchanged) ... */
+        .marquee-container {
             text-align: center;
-            padding: 10px;
             background-color: #333;
             color: white;
-        }
-
-        .countdown-container {
-            text-align: center;
-            position: relative;
-        }
-
-        .countdown {
-            font-size: 24px;
-            background-color: #fff;
-            border-radius: 50%;
-            padding: 10px 20px;
-            display: inline-block;
+            padding: 10px;
+            border-radius: 5px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-            position: relative;
+            margin-bottom: 20px;
         }
-
-        .animated-border {
-            border: 2px solid transparent;
-            border-image: linear-gradient(90deg, #ff5733, #ffc300);
-            border-image-slice: 1;
-            animation: borderAnimation 2s infinite;
+        
+        .blink-text {
+            animation: blink 1s steps(7) infinite;
         }
-
-        @keyframes borderAnimation {
-            0%, 100% {
-                transform: scale(1);
+        
+        @keyframes blink {
+            0% {
+                color: white;
             }
-            50% {
-                transform: scale(1.1);
+            10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100% {
+                color: yellow; /* Thay đổi màu chữ tại các bước khác nhau */
             }
-        }
-
-        .win-announcement {
-            text-align: center;
-            background-color: #333;
-            color: white;
-            padding: 10px;
-        }
-
-        .schedule-container {
-            text-align: center;
-            position: relative;
-        }
-
-        .schedule {
-            font-size: 18px;
-            padding: 5px;
-            display: inline-block;
-            position: relative;
-            animation: pulseAnimation 1.5s infinite;
-        }
-
-        @keyframes pulseAnimation {
-            0%, 100% {
-                transform: scale(1);
+            12%, 22%, 32%, 42%, 52%, 62%, 72%, 82%, 92% {
+                color: red;
             }
-            50% {
-                transform: scale(1.1);
+            14%, 24%, 34%, 44%, 54%, 64%, 74%, 84%, 94% {
+                color: pink;
+            }
+            16%, 26%, 36%, 46%, 56%, 66%, 76%, 86%, 96% {
+                color: green;
             }
         }
+        
     </style>
     <script>
-        window.addEventListener('load', () => {
-            const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
-            audio.play();
-        });
-
-        function updateTime() {
-            const countdownElement = document.getElementById('countdown');
-            const now = new Date();
-            const matchTime = new Date('2023-08-11T18:00:00'); // Thay bằng thời gian thực tế của trận đấu
-            const timeDiff = matchTime - now;
-
-            const seconds = Math.floor(timeDiff / 1000) % 60;
-            const minutes = Math.floor(timeDiff / (1000 * 60)) % 60;
-            const hours = Math.floor(timeDiff / (1000 * 60 * 60));
-
-            countdownElement.textContent = `${hours.toString().padStart(2, '0')} : ${minutes.toString().padStart(2, '0')} : ${seconds.toString().padStart(2, '0')}`;
-
-            if (timeDiff <= 0) {
-                countdownElement.textContent = 'Trận đấu đã kết thúc';
-            }
-        }
-
-        setInterval(updateTime, 1000);
+        // JavaScript code...
     </script>
 </head>
 <body>
     <div class="bg-container">
+        <div class="white-floating-bg"></div>
         {% if notification %}
-        <div class="header">
-            <marquee behavior="scroll" direction="left">{{notification}}</marquee>
+        <div class="marquee-container">
+            <marquee behavior="scroll" direction="left" class="blink-text">{{notification}}</marquee>
         </div>
         {%else%}
-        <div>
-            <marquee behavior="scroll" direction="left">Vui là 9, thắng là 10.</marquee>
+        <div class="marquee-container">
+            <marquee behavior="scroll" direction="left" class="blink-text">Vui là 9, thắng là 10.</marquee>
         </div>
         {% endif %}
         <div class="table-container">
@@ -196,52 +163,52 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td class="yellow-cell">Đội A</td>
-                            <td>10</td>
-                            <td>8</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>25</td>
-                            <td>10</td>
-                            <td>+15</td>
-                            <td>25</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td class="yellow-cell">Đội B</td>
-                            <td>10</td>
-                            <td>7</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>20</td>
-                            <td>8</td>
-                            <td>+12</td>
-                            <td>23</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td class="yellow-cell">Đội C</td>
-                            <td>10</td>
-                            <td>6</td>
-                            <td>2</td>
-                            <td>2</td>
-                            <td>18</td>
-                            <td>12</td>
-                            <td>+6</td>
-                            <td>20</td>
-                        </tr>
+                        {% for item in sorted_champions  %}
+                            <tr>
+                                <td>{{item.index}}</td>
+                                <td>{{item.name_team}}</td>
+                                <td>{{item.count_round}}</td>
+                                <td>{{item.count_win}}</td>
+                                <td>{{item.count_lose}}</td>
+                                <td>{{item.count_draw}}</td>
+                                <td>{{item.goal}}</td>
+                                <td>{{item.goal_conceded}}</td>
+                                {% if item.h_s >= 0 %}
+                                    <td>+{{item.h_s}}</td>
+                                {% else %}
+                                    <td>{{item.h_s}}</td>
+                                {% endif %}
+                                <td>{{item.point}}</td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
-
-        <div class="schedule-container">
-            <div class="schedule animated-border">19:00 - Đội A vs Đội B</div>
-            <div class="schedule">20:30 - Đội C vs Đội D</div>
-            <div class="schedule">22:00 - Đội E vs Đội F</div>
-        </div>
+    </div>
+    <div class="schedule-container">
+        <table class="schedule-table">
+            <thead>
+                <tr>
+                    <th>Thời gian</th>
+                    <th>Trận đấu</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>19:00</td>
+                    <td class="animated-border">Đội A vs Đội B</td>
+                </tr>
+                <tr>
+                    <td>20:30</td>
+                    <td>Đội C vs Đội D</td>
+                </tr>
+                <tr>
+                    <td>22:00</td>
+                    <td>Đội E vs Đội F</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
