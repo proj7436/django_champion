@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from .models import Champion
 from django.http import HttpResponse
+from .forms import ChampionForm
 # Create your views here.
 
 
@@ -15,11 +16,8 @@ class Main(View):
         # Sắp xếp danh sách đối tượng theo điểm số tăng dần, sau đó theo hiệu số giảm dần
         sorted_champions = sorted(champions, key=lambda x: (x.point, -x.h_s), reverse=True)
         
-        # Tạo nội dung HTML từ danh sách đã sắp xếp
-
-        
         # Trả về HttpResponse chứa nội dung HTML
-        return HttpResponse(sorted_champions)
+        return render(request, 'main.html', {'sorted_champions': sorted_champions})
 
 
 class AdminSite(View):
@@ -32,28 +30,30 @@ class AdminSite(View):
     def post(self, request):
 
         input_ = request.POST
+        form = ChampionForm(data=request.POST)
 
+        if form.is_valid():
+            team1_name = input_.get('team1_name')
+            team2_name = input_.get('team2_name')
 
-        team1_name = input_.get('team1_name')
-        team2_name = input_.get('team2_name')
+            score1 = input_.get('score1')
+            score2 = input_.get('score2')
 
-        score1 = input_.get('score1')
-        score2 = input_.get('score2')
+            oj1 = Champion.objects.get(name_team = team1_name)
+            oj2 = Champion.objects.get(name_team = team2_name)
 
-        oj1 = Champion.objects.get(name_team = team1_name)
-        oj2 = Champion.objects.get(name_team = team2_name)
+            if score1 > score2:
+                oj1.count_win += 1
+                oj2.count_lose += 1
+            elif score1== score2:
+                oj1.count_draw += 1
+                oj2.count_draw += 1
+            else:
+                oj1.count_lose += 1
+                oj2.count_win += 1
 
-        if score1 > score2:
-            oj1.count_win += 1
-            oj2.count_lose += 1
-        elif score1== score2:
-            oj1.count_draw += 1
-            oj2.count_draw += 1
-        else:
-            oj1.count_lose += 1
-            oj2.count_win += 1
+            oj1.save()
+            oj2.save()
 
-        oj1.save()
-        oj2.save()
-
-        return render(request, 'admin.html', {'message':'Cap nhat thanh cong!'})
+            return render(request, 'admin.html', context={'message':'Cap nhat thanh cong!'})
+        return render(request, 'admin.html', context={'message':'error'})

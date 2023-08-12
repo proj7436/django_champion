@@ -83,7 +83,7 @@
 <body>
     <div class="admin-container">
         <h1>Admin - Cập nhật trận đấu</h1>
-        <form action="{% url 'admin'%}" method="post">
+        <form action="{% url 'champion:admin'%}" method="post">
             {% csrf_token %}
             <div class="team-picker">
                 <h2>Chọn đội đấu:</h2>
