@@ -44,9 +44,27 @@
             align-items: center;
             height: 100vh;
             overflow-x: auto;
-            overflow-y: auto; /* Hide vertical scrollbar */
+            overflow-y: auto;
         }
 
+        .rank-table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: white;
+        }
+
+        .rank-table th,
+        .rank-table td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+            white-space: nowrap;
+        }
+        .yellow-cell {
+            background: yellow
+        }
         .schedule-container {
             text-align: center;
             position: relative;
@@ -75,25 +93,7 @@
             color: white;
         }
 
-        .rank-table {
-            width: 100%;
-            max-width: 600px;
-            border-collapse: collapse;
-            margin: 20px auto; /* Adjusted margin */
-            background-color: white; /* Same background color as schedule */
-        }
-        
-        .rank-table th,
-        .rank-table td {
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
 
-        .rank-table th.yellow-cell {
-            background-color: yellow;
-            color: black;
-        }
 
         /* ... (Rest of the CSS remains unchanged) ... */
         .marquee-container {
