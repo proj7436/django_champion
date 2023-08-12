@@ -7,7 +7,7 @@ class Champion(models.Model):
     name_team = models.CharField(max_length=30)
     count_round = models.IntegerField()
     count_win =models.IntegerField()
-    count_lose = models.IntegerField()
+    count_lose = models.IntegerField()  
     count_draw = models.IntegerField()
     goal = models.IntegerField()
     goal_conceded = models.IntegerField()
@@ -26,4 +26,6 @@ class InfoMatch(models.Model):
     
     
 class Notification(models.Model):
-    noti = models.CharField(max_length = 255, default='Vui là 9, Thắng là 10.')
+    noti = models.CharField(max_length = 255)
+  
+    

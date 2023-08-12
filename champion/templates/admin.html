@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Cập nhật trận đấu</title>
+    <title>Admin</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,9 +21,13 @@
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
         }
-
-        h1, h2 {
+        h1 {
             text-align: center;
+            color:red
+        }
+        h2 {
+            text-align: center;
+            
         }
 
         .team-picker {
@@ -83,26 +87,27 @@
 </head>
 <body>
     <div class="admin-container">
-        <h1>Admin - Cập nhật trận đấu</h1>
+        <h1>Admin</h1>
+        <h2>Cập nhật tỉ số trận đấu </h2>
         <form action="{% url 'champion:admin'%}" method="post">
             {% csrf_token %}
             <div class="team-picker">
-                <h2>Chọn đội đấu:</h2>
                 <select name="team1">
                     <option value="">Chọn đội 1</option>
                     {% for item in list %}
-                    <option value="item.id"> {{item.name_team}} </option>
+                    <option value="{{item.id}}"> {{item.name_team}} </option>
                     {% endfor %}
                     <!-- Thêm các đội khác nếu cần -->
                 </select>
                 <select name="team2">
                     <option value="">Chọn đội 2</option>
                     {% for item in list %}
-                    <option value="item.id"> {{item.name_team}} </option>
+                    <option value="{{item.id}}"> {{item.name_team}} </option>
                     {% endfor %}
                     <!-- Thêm các đội khác nếu cần -->
                 </select>
                 <input type="number" name="score1" placeholder="Tỉ số đội 1">
+                <br>
                 <input type="number" name="score2" placeholder="Tỉ số đội 2">
 
                             <!-- Thêm các trường ẩn để lưu tên đội đấu -->
@@ -115,7 +120,39 @@
                {% endif %}
             </div>
         </form>
-    </div>
+
     
+    
+        <h2> Cập nhật thông báo </h2>
+        <form action="{% url 'champion:HandleNoti'%}" method="post">
+            {% csrf_token %}
+            <label for="notification">Thông báo:</label>
+            <input type="text" name="noti" required></input>
+            {% if message1 %}
+               <p>{{message1}}</p>
+               {% endif %}
+            <button type="submit">Cập nhật thông báo</button>
+        
+        </form>
+
+
+
+        <h2>Cập nhật thời gian trận đấu sắp tới</h2>
+    <form action="{% url 'champion:HandleInfoMatch' %}" method="post">
+        {% csrf_token %}
+        
+        <label for="time">Thời gian:</label>
+        <input type="text" name="time" placeholder="Thời gian" required>
+        <br>
+        <label for="time">2 đội đấu:</label>
+        <input type="text" name="info" placeholder="2_teams" required>
+        {% if message2 %}
+               <p>{{message2}}</p>
+               {% endif %}
+        <button type="submit">Cập nhật</button>
+    
+   
+    </form>
+    </div>
 </body>
 </html>

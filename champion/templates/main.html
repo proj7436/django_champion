@@ -54,7 +54,11 @@
             margin: 20px auto;
             background-color: white;
         }
-
+        .table-wrapper {
+            overflow-x: auto;
+            width: 100%;
+            max-width: 100%;
+        }
         .rank-table th,
         .rank-table td {
             padding: 10px;
@@ -126,19 +130,114 @@
             16%, 26%, 36%, 46%, 56%, 66%, 76%, 86%, 96% {
                 color: green;
             }
+        
+        }
+        #show-rules {
+            background-color: #2ecc71; /* Màu xanh */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 20px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease; /* Hiệu ứng màu nền khi hover */
+          }
+          
+          #show-rules:hover {
+            background-color: #27ae60; /* Màu xanh đậm khi hover */
+          }
+          .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 9999; /* Đảm bảo modal hiển thị trên cùng */
+            overflow: auto; /* Thêm thanh cuộn nếu nội dung quá dài */
+          }
+          
+          
+          .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            
+           
+            border-radius: 5px;
+            width: 80%;
+            max-width: 800px;
+            position: relative;
+          }
+          .close {
+            position: absolute;
+            top: 0;
+            right: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+          }  
+          @keyframes animate-lines {
+            0% {
+                border-top: 2px solid green;
+                border-bottom: 2px solid red;
+            }
+            33% {
+                border-top: 2px solid red;
+                border-bottom: 2px solid yellow;
+            }
+            66% {
+                
+               
+        border-top: 2px solid yellow;
+                border-bottom: 2px solid green;
+            }
+            100% {
+                border-top: 2px solid green;
+                border-bottom: 2px solid red;
+            }
         }
         
+        .animate-row {
+            animation: animate-lines 2s linear infinite;
+        }
+                
     </style>
     <script>
-        // JavaScript code...
+        document.addEventListener('DOMContentLoaded', () => {
+            const rulesModal = document.getElementById('rules-modal');
+            const showRulesButton = document.getElementById('show-rules');
+            const closeButton = document.querySelector('.close');
+          
+            showRulesButton.addEventListener('click', () => {
+              rulesModal.style.display = 'block';
+            });
+          
+            closeButton.addEventListener('click', () => {
+              rulesModal.style.display = 'none';
+            });
+          });
+        document.addEventListener('DOMContentLoaded', () => {
+            const tableRows = document.querySelectorAll('.data-row');
+        
+            if (tableRows.length > 0) {
+                tableRows[0].classList.add('blink-row');
+            }
+        });
+        
     </script>
 </head>
 <body>
     <div class="bg-container">
         <div class="white-floating-bg"></div>
-        {% if notification %}
+        {% if noti %}
         <div class="marquee-container">
-            <marquee behavior="scroll" direction="left" class="blink-text">{{notification}}</marquee>
+            <marquee behavior="scroll" direction="left" class="blink-text">{{noti}}</marquee>
         </div>
         {%else%}
         <div class="marquee-container">
@@ -146,7 +245,7 @@
         </div>
         {% endif %}
         <div class="table-container">
-            <div class="scrollable-table">
+            <div class="table-wrapper">
                 <table class="rank-table">
                     <thead>
                         <tr>
@@ -186,6 +285,24 @@
             </div>
         </div>
     </div>
+    <button id="show-rules">Xem Thể Lệ</button>
+    <div id="rules-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Thể Lệ</h2>
+            <p>1, Điểm (Points): Đội thắng được 3 điểm, hòa được 1 điểm, và thua không được điểm nào.</p>
+            <p>2, Số trận (Matches Played - ST): Tổng số trận đấu mà đội đã tham gia.</p>
+            <p>3, Thắng (Wins): Số lượng trận đấu mà đội đã giành chiến thắng.</p>
+            <p>4, Hòa (Draws): Số lượng trận đấu mà đội hòa.</p>
+            <p>5, Thua (Losses): Số lượng trận đấu mà đội thua.</p>
+            <p>6, Bàn thắng (Goals For - B.Thắng): Tổng số bàn thắng mà đội ghi được trong tất cả các trận đấu.</p>
+            <p>7, Bàn thua (Goals Against - B.Thua): Tổng số bàn thua mà đội phải nhận trong tất cả các trận đấu.</p>
+            <p>8, Hiệu số bàn thắng (Goal Difference - H/S): Hiệu số bàn thắng được tính bằng cách lấy số bàn thắng (B.Thắng) trừ đi số bàn thua (B.Thua).</p>
+            <p>9, Điểm (Points): Điểm sẽ được tính dựa trên cách tính điểm ở mục 1. Đội có điểm cao nhất sẽ đứng đầu bảng xếp hạng.</p>
+            <p>10, Xếp hạng (Ranking - XH): Thường sẽ dựa trên số điểm (điểm cao hơn sẽ xếp hạng cao hơn), và nếu có số điểm bằng nhau thì sẽ xem xét đến hiệu số bàn thắng (H/S).</p>
+        </div>
+    </div>
+
     <div class="schedule-container">
         <table class="schedule-table">
             <thead>
@@ -195,18 +312,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>19:00</td>
-                    <td class="animated-border">Đội A vs Đội B</td>
+                {% for item in list_info_match %}
+                <tr class="data-row {% if forloop.first %}animate-row{% endif %}">
+                    <td>{{item.time}}</td>
+                    <td>{{item.info}}</td>
                 </tr>
-                <tr>
-                    <td>20:30</td>
-                    <td>Đội C vs Đội D</td>
-                </tr>
-                <tr>
-                    <td>22:00</td>
-                    <td>Đội E vs Đội F</td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
