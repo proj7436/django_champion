@@ -153,6 +153,23 @@
     
    
     </form>
+
+
+        <h2>Xóa mốc lịch trình</h2>
+        <form action= "{% url 'champion:RemoveInfoMatch' %}" method="post">
+            {% csrf_token %}
+            <select name="team" id="team">
+                <option >Chọn mốc muốn xóa</option>
+                {% for item in list_info %}
+                    
+                    <option value="{{item.id}}" >{{item.time}} - {{item.info}}</option>
+                {% endfor %}
+            </select>
+            {% if message3 %}
+            {{message3}}
+            {% endif %}
+            <button type="submit">Xóa</button>
+        </form>
     </div>
 </body>
 </html>

@@ -30,12 +30,14 @@ class AdminSite(View):
     def get(self, request):
 
         oj = Champion.objects.all()
-        return render(request, 'admin.html', {"list":oj})
+        oj_ = InfoMatch.objects.all()
+        return render(request, 'admin.html', {"list":oj, 'list_info':oj_})
     
 
     def post(self, request):
 
         oj = Champion.objects.all()
+        oj_ = InfoMatch.objects.all()
         
         input_ = request.POST
         form = ChampionForm(request.POST)
@@ -94,8 +96,8 @@ class AdminSite(View):
             oj1.save()
             oj2.save()
 
-            return render(request, 'admin.html', context={'message':'Cap nhat thanh cong!', 'list':oj})
-        return render(request, 'admin.html', context={'message':'error', 'list':oj})
+            return render(request, 'admin.html', context={'message':'Thanh cong!', 'list':oj, 'list_info':oj_})
+        return render(request, 'admin.html', context={'message':'error', 'list':oj, 'list_info':oj_})
     
     
     
@@ -104,6 +106,7 @@ class AdminSite(View):
 class HandleNoti(View):
     def post(self, request):
         oj = Champion.objects.all()
+        oj_ = InfoMatch.objects.all()
         data = request.POST
         form = NotificationForm(data)
         
@@ -114,14 +117,16 @@ class HandleNoti(View):
             oj_.noti = noti_
             
             oj_.save()
-            return render(request, 'admin.html', context={'message1':'Cap nhat thanh cong!', 'list':oj})
-        return render(request, 'admin.html', context={'message1':'error', 'list':oj})
+            return render(request, 'admin.html', context={'message1':'Thanh cong!', 'list':oj, 'list_info':oj_})
+        return render(request, 'admin.html', context={'message1':'error', 'list':oj, 'list_info':oj_})
     
     
     
 class HandleInfoMatch(View):
     def post(self, request):
         oj = Champion.objects.all()
+        oj_ = InfoMatch.objects.all()
+        
         data = request.POST
         form = InfoMatchForm(data)
         
@@ -130,12 +135,31 @@ class HandleInfoMatch(View):
             info = data.get('info')
             
             InfoMatch.objects.create(time = time, info = info)    
-            return render(request, 'admin.html', context={'message2':'Cap nhat thanh cong!', 'list':oj})
-        return render(request, 'admin.html', context={'message2':'error', 'list':oj})
+            return render(request, 'admin.html', context={'message2':'Thanh cong!', 'list':oj, 'list_info':oj_})
+        return render(request, 'admin.html', context={'message2':'error', 'list':oj, 'list_info':oj_})
     
     
     
-    
+class RemoveInfoMatch(View):
+    def post(self, request):
+        
+        oj = Champion.objects.all()
+        oj_ = InfoMatch.objects.all()
+        
+        data = request.POST.get('team')
+        
+        
+        
+        try:
+            get_oj = InfoMatch.objects.get(id=data)
+            
+            get_oj.delete()
+            
+            return render(request, 'admin.html', context={'message3':'Thanh cong!', 'list':oj, 'list_info':oj_})
+        except InfoMatch.DoesNotExist:
+            # return render(request, 'admin.html', context={'message3':'error', 'list':oj, 'list_info':oj_})
+            return HttpResponse(f'info:{info_del}')
+        
     
 
 
