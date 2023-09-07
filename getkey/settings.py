@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-6!g#)+q*pwc_*dxrh+nngbae+u+_qthbz*a36!zg-5_k-+-ttg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -78,11 +78,14 @@ WSGI_APPLICATION = 'getkey.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'myxybgvg',
+        'USER': 'myxybgvg',
+        'PASSWORD': 'KfeWKMRMSaH-ru_tV01SqrRIBFx0Zcaz',
+        'HOST': 'rosie.db.elephantsql.com',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
